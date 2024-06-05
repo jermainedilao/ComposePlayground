@@ -1,10 +1,6 @@
 package com.example.composeplayground
 
 import android.graphics.PointF
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
@@ -14,7 +10,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -32,32 +27,20 @@ import androidx.compose.ui.graphics.drawscope.clipRect
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.composeplayground.ui.theme.BarColor
 import com.example.composeplayground.ui.theme.ComposePlaygroundTheme
+import com.example.composeplayground.ui.theme.PurpleBackgroundColor
 import java.math.BigDecimal
 import java.time.LocalDate
 
 // References:
 // https://github.com/riggaroo/compose-playtime/blob/main/app/src/main/java/dev/riggaroo/composeplaytime/SmoothLineGraph.kt
 // https://www.youtube.com/watch?v=1yiuxWK74vI
-class GraphActivity : ComponentActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            ComposePlaygroundTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Graph(modifier = Modifier.padding(innerPadding))
-                }
-            }
-        }
-    }
-}
-
 @Composable
-fun Graph(modifier: Modifier = Modifier) {
+fun GraphScreen() {
     Box(
-        modifier = modifier
+        modifier = Modifier
+            .fillMaxSize()
             .background(PurpleBackgroundColor)
             .fillMaxSize()
     ) {
@@ -67,7 +50,7 @@ fun Graph(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun DrawPath(modifier: Modifier) {
+private fun DrawPath(modifier: Modifier) {
     val animationProgress = if (LocalInspectionMode.current) {
         remember { Animatable(1f) }
     } else {
@@ -145,13 +128,13 @@ private fun DrawBackground(modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun GraphPreview() {
+private fun GraphPreview() {
     ComposePlaygroundTheme {
-        Graph()
+        GraphScreen()
     }
 }
 
-fun generatePath(size: Size): Path {
+private fun generatePath(size: Size): Path {
     val path = Path()
     val numberEntries = graphData.size - 1
     val weekWidth = size.width / numberEntries
@@ -189,7 +172,7 @@ fun generatePath(size: Size): Path {
     return path
 }
 
-val graphData = listOf(
+private val graphData = listOf(
     Balance(LocalDate.now(), BigDecimal(65631)),
     Balance(LocalDate.now().plusWeeks(1), BigDecimal(65931)),
     Balance(LocalDate.now().plusWeeks(2), BigDecimal(65851)),
@@ -205,7 +188,5 @@ val graphData = listOf(
     Balance(LocalDate.now().plusWeeks(12), BigDecimal(72976)),
     Balance(LocalDate.now().plusWeeks(13), BigDecimal(73589)),
 )
-val PurpleBackgroundColor = Color(0xff322049)
-val BarColor = Color.White.copy(alpha = 0.3f)
 
-data class Balance(val date: LocalDate, val amount: BigDecimal)
+private data class Balance(val date: LocalDate, val amount: BigDecimal)
