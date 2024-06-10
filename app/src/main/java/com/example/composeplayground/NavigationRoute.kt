@@ -11,4 +11,12 @@ sealed class NavigationRoute {
     data object Drawing : NavigationRoute()
     @Serializable
     data object Graph : NavigationRoute()
+    @Serializable
+    data object FillInTheBlanks : NavigationRoute()
+    @Serializable
+    data object FillInTheBlanksV2 : NavigationRoute()
+    @Serializable
+    data object FillInTheBlanksV3 : NavigationRoute()
+    @Serializable
+    data object FillInTheBlanksV4 : NavigationRoute()
 }

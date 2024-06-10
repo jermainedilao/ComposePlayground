@@ -19,7 +19,6 @@ import androidx.compose.ui.graphics.NativeCanvas
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.dialog
 import androidx.navigation.compose.rememberNavController
 import com.example.composeplayground.ui.theme.ComposePlaygroundTheme
 
@@ -71,6 +70,18 @@ fun App() {
                         this
                     }
                 }
+            }
+            composable<NavigationRoute.FillInTheBlanks> {
+                FillInTheBlanksScreen()
+            }
+            composable<NavigationRoute.FillInTheBlanksV2> {
+                FillInTheBlanksScreenV2()
+            }
+            composable<NavigationRoute.FillInTheBlanksV3> {
+                FillInTheBlanksScreenV3()
+            }
+            composable<NavigationRoute.FillInTheBlanksV4> {
+                FillInTheBlanksScreenV4()
             }
         }
     }

@@ -34,6 +34,18 @@ fun MainScreen(
             Button(onClick = { onNavigateClick.invoke(NavigationRoute.Drawing) }) {
                 Text(text = "Open Drawing")
             }
+            Button(onClick = { onNavigateClick.invoke(NavigationRoute.FillInTheBlanks) }) {
+                Text(text = "Open Fill In The Blanks")
+            }
+            Button(onClick = { onNavigateClick.invoke(NavigationRoute.FillInTheBlanksV2) }) {
+                Text(text = "Open Fill In The Blanks V2")
+            }
+            Button(onClick = { onNavigateClick.invoke(NavigationRoute.FillInTheBlanksV3) }) {
+                Text(text = "Open Fill In The Blanks V3")
+            }
+            Button(onClick = { onNavigateClick.invoke(NavigationRoute.FillInTheBlanksV4) }) {
+                Text(text = "Open Fill In The Blanks V4")
+            }
         }
     }
 }
