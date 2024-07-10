@@ -7,6 +7,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -26,6 +27,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
@@ -68,6 +70,7 @@ fun DrawingScreen(
                 .align(Alignment.Center)
                 .offset(y = (-50).dp)
                 .background(Color.White)
+                .clipToBounds()
                 .pointerInput(Unit) {
                     detectTapGestures(
                         onTap = {
@@ -116,13 +119,17 @@ fun DrawingScreen(
                                 strokeJoin = android.graphics.Paint.Join.ROUND
                                 strokeWidth = 10f
                             })
-                            drawPath(path, Color.Black, style = Stroke(10f, cap = StrokeCap.Round, join = StrokeJoin.Round))
+                            drawPath(
+                                path,
+                                Color.Black,
+                                style = Stroke(10f, cap = StrokeCap.Round, join = StrokeJoin.Round)
+                            )
                         }
                         picture.endRecording()
                     }
                 },
         )
-        if (bitmap != null) {
+        if (bitmap!=null) {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
@@ -139,12 +146,24 @@ fun DrawingScreen(
                 }
             }
         }
-        Button(
-            modifier = Modifier
-                .fillMaxWidth(.9f)
-                .align(Alignment.BottomCenter),
-            onClick = { onSaveDrawing(picture) }) {
-            Text(text = "Save")
+        Column(modifier = Modifier.align(Alignment.BottomCenter)) {
+            Button(
+                modifier = Modifier
+                    .fillMaxWidth(.9f),
+                onClick = {
+                    path.reset()
+                    lines = 1
+                }) {
+                Text(text = "Clear")
+            }
+            Button(
+                modifier = Modifier
+                    .fillMaxWidth(.9f),
+                onClick = {
+                    onSaveDrawing(picture)
+                }) {
+                Text(text = "Save")
+            }
         }
     }
 }

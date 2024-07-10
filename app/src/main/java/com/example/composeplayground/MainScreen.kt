@@ -46,6 +46,9 @@ fun MainScreen(
             Button(onClick = { onNavigateClick.invoke(NavigationRoute.FillInTheBlanksV4) }) {
                 Text(text = "Open Fill In The Blanks V4")
             }
+            Button(onClick = { onNavigateClick.invoke(NavigationRoute.Coil) }) {
+                Text(text = "Open Coil")
+            }
         }
     }
 }

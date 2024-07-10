@@ -83,6 +83,9 @@ fun App() {
             composable<NavigationRoute.FillInTheBlanksV4> {
                 FillInTheBlanksScreenV4()
             }
+            composable<NavigationRoute.Coil> {
+                CoilScreen()
+            }
         }
     }
 }

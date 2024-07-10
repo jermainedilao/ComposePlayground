@@ -19,4 +19,6 @@ sealed class NavigationRoute {
     data object FillInTheBlanksV3 : NavigationRoute()
     @Serializable
     data object FillInTheBlanksV4 : NavigationRoute()
+    @Serializable
+    data object Coil : NavigationRoute()
 }
